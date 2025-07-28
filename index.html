@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button id="addButt">Add item</button>
+    </div>
+
+    <ul id="shoppingList">
+
+    </ul>
+
+    <script>
+      let listLength = 0;
+
+      function addItem(){
+        const newListItem = document.createElement("li");
+        newListItem.id = "li" + listLength;
+        let input = document.querySelector("#item");
+        const newItemContent = document.createTextNode(input.value);
+        input.value = "";
+        const itemDeleteButton = document.createElement("button");
+        itemDeleteButton.id = "delButt" + listLength;
+        itemDeleteButton.textContent = "Delete";
+        itemDeleteButton.addEventListener("click", removeItem);
+        newListItem.appendChild(newItemContent);
+        newListItem.appendChild(itemDeleteButton);
+
+        let shoppingList = document.querySelector("#shoppingList");
+        shoppingList.appendChild(newListItem);
+        listLength++;
+        input.focus();
+      }
+
+      function removeItem(event) {
+        const itemNum = event.target.id.at(-1);
+        listItemId = "#li" + itemNum;
+        listItemToDelete = document.querySelector(listItemId);
+        listItemToDelete.remove();
+        listLength--;
+      }
+
+      const addButt = document.querySelector("#addButt");
+      addButt.addEventListener("click", addItem);
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
